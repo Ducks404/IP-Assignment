@@ -5,36 +5,202 @@
 </head>
 <body>
     <style type="text/css">
+        body{
+            margin:0;
+            padding:0;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
         main {
             display:flex;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             flex-direction:column;
+            color:lightgray;
+            background: linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+            url(images/bg-image.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            background-size: 100% 100%;
+            padding-bottom: 50px;
         }
-        /*Temporary*/
+        /* Temporary
         main > *{
             border: 1px solid;
-        }
+        } */
         #movie-info{
             display:flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
         #movie-info > *{
             padding: 30px;
         }
         #movie-poster{
             padding:0;
-            margin:0;
+            margin:10px;
+            max-width: 30%;
         }
-        #movie-poster > img{
-            max-width: 100%;
+        #movie-details{
+            max-width: 60%;
+            font-size: 1.25vw;
+            margin-left: 10px;
+            border-left: 1px solid;
+        }
+        #bg-info{
+            color:gray;
+        }
+        #movie-timetable{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         #days{
             display:flex;
             flex-direction: row;
+            width: 90%;
+            margin-top:10px;
+            backdrop-filter:blur(15px);
         }
-        #days > *{
+        .day{
             padding: 1%;
+            width:15%;
+            height:fit-content;
+            text-align:center;
+            border: 1px solid;
+            border-top-left-radius: 15%;
+            border-top-right-radius: 15%;
         }
+        .day:hover{
+            background-color: rgb(70, 72, 72);
+        }
+        .day > *{
+            margin: 0;
+        }
+        .day > p{
+            font-size:1vw;
+        }
+        #schedule{
+            width:90%;
+            backdrop-filter:blur(15px);
+        }
+        #schedule > *{
+            width: 100%;
+        }
+        .premium{
+            color:gold;
+        }
+        .movie-times,
+        .movie-times td{
+            border: 1px solid;
+            font-size: 1.75vw;
+        }
+        .movie-times td{
+            padding: 10px;
+        }
+
+
+
+        /*footer*/
+        p,
+        h6{
+            font-size:1.25vw
+        }
+        h6{
+            margin: 20px 0;
+        }
+        #footer {
+            border-top: 1px solid rgb(96, 123, 255);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 0;
+            padding: 20px;
+            padding-bottom:0;
+            font-size: 30px;
+            background: linear-gradient(
+            rgba(0, 0, 0, 0.4), 
+            rgba(0, 0, 0, 0.4)
+            ),url(images/footer-bg.png);
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            background-size: 100% 100%;
+            color:lightgray
+            
+        }
+        a:link{
+            color:red;
+        }
+        #footer > hr{
+            background-color: gray;
+        }
+			
+			.login-box {
+				border: 2px solid black;
+				padding: 3px;
+				width: 85px;
+				height: 25px;
+				text-align: center;
+			}
+				
+			.login-link {
+				text-decoration: underline;
+				color: blue;
+				font-weight: bold;
+				font-size: 18px;
+			}
+			
+			.nav-bar {
+				background-color: white;
+				padding: 10px;
+				border-radius: 10px; 
+				width: 600px;
+				text-align: center;
+				border: 2px solid black;
+			}
+			
+			.nav-link {
+				color: black;
+				text-decoration: underline;
+				margin: 0 10px;
+				font-size: 25px;
+			}
+            #footer-top,
+            #footer-bottom {
+                display:flex;
+                flex-direction: row;
+                width: 100%;
+            }
+
+			.form-box {
+				border: 1px solid black; 
+				padding: 20px; 
+				background-color: rgb(173, 198, 230); 
+                color: black;
+				width: 350px; 
+				height: 25px;
+				border-radius: 10px; 
+				font-size: 20px;
+			}
+            #footer-bottom div figure{
+                max-width: 100%;
+                margin: 20px 0 0 0;
+            }
+            #footer-bottom div figure img{
+                max-width: 100%;
+            }
+            #extras{
+                display:flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: flex-end;
+                width:100%;
+            }
+            #extras > *{
+                padding: 0 10px;
+            }
     </style>
 
 
@@ -57,35 +223,59 @@
     </header>
     <main>
         <section id="movie-info">
-            <figure id="movie-poster">
-                <img src="images/kung-fu-panda-4-poster.webp"/>
-            </figure>
+            <img id="movie-poster" src="images/kung-fu-panda-4-poster.webp" alt="Kungfu Panda 4 Movie Poster"/>
             <section id="movie-details">
-                <h2>Kung Fu Panda 4</h2>
-                <p><b>Genre:</b> Adventure, Animation</p>
-                <p><b>Duration:</b> Two hours and thirty minutes</p>
-                <h4>Directed by Mike Mitchell, Stephanie Stine. With Jack Black, Awkwafina, Viola Davis, Dustin Hoffman.</h4>
-                <p>The film was directed by Mike Mitchell, co-directed by Stephanie Ma Stine (in her feature directorial debut), written by Darren Lemke and the writing team of Jonathan Aibel and Glenn Berger, and produced by Rebecca Huntley. It features Jack Black, Dustin Hoffman, James Hong, Bryan Cranston, and Ian McShane reprising their roles from the previous films, with Awkwafina, Ke Huy Quan, Ronny Chieng, Lori Tan Chinn, and Viola Davis joining the cast. In the film, Po (Black), who must find and train his successor as the new Dragon Warrior, teams up with fox bandit Zhen (Awkwafina) to defeat the evil sorceress, the Chameleon (Davis).</p>
+                <h1><u>Kung Fu Panda 4</u></h1>
+                <p><u><b>Genre:</b></u> Adventure, Animation</p>
+                <p><u><b>Duration:</b></u> 2h 30m</p>
+                <h4><u>Directed by</u> Mike Mitchell, Stephanie Stine. With Jack Black, Awkwafina, Viola Davis, Dustin Hoffman.</h4>
+                <p id="bg-info">The film was directed by Mike Mitchell, co-directed by Stephanie Ma Stine (in her feature directorial debut), written by Darren Lemke and the writing team of Jonathan Aibel and Glenn Berger, and produced by Rebecca Huntley. It features Jack Black, Dustin Hoffman, James Hong, Bryan Cranston, and Ian McShane reprising their roles from the previous films, with Awkwafina, Ke Huy Quan, Ronny Chieng, Lori Tan Chinn, and Viola Davis joining the cast. In the film, Po (Black), who must find and train his successor as the new Dragon Warrior, teams up with fox bandit Zhen (Awkwafina) to defeat the evil sorceress, the Chameleon (Davis).</p>
                 <hr/>
-                <p><b>Synopsis:</b> After Po is tapped to become the Spiritual Leader of the Valley of Peace, he needs to find and train a new Dragon Warrior, while a wicked sorceress plans to re-summon all the master villains whom Po has vanquished to the spirit realm.
+                <p>After Po is tapped to become the Spiritual Leader of the Valley of Peace, he needs to find and train a new Dragon Warrior, while a wicked sorceress plans to re-summon all the master villains whom Po has vanquished to the spirit realm.
                     Po is gearing up to become the spiritual leader of his Valley of Peace, but also needs someone to take his place as Dragon Warrior. As such, he will train a new kung fu practitioner for the spot and will encounter a villain called the Chameleon who conjures villains from the past.</p>
             </section>
         </section>
+        <hr style="width:98%;"/>
         <section id="movie-timetable">
             <section id="days">
-                <h2>Monday</h2>
-                <h2>Tuesday</h2>
-                <h2>Wednesday</h2>
-                <h2>Thursday</h2>
-                <h2>Friday</h2>
-                <h2>Saturday</h2>
-                <h2>Sunday</h2>
+                <section class="day">
+                    <h2>Monday</h2>
+                    <p>3/25</p>
+                </section>
+                <section class="day">
+                    <h2>Tuesday</h2>
+                    <p>3/26</p>
+                </section>
+                <section class="day">
+                    <h2>Wednesday</h2>
+                    <p>3/27</p>
+                </section>
+                <section class="day">
+                    <h2>Thursday</h2>
+                    <p>3/28</p>
+                </section>
+                <section class="day">
+                    <h2>Friday</h2>
+                    <p>3/29</p>
+                </section>
+                <section class="day">
+                    <h2>Saturday</h2>
+                    <p>3/30</p>
+                </section>
+                <section class="day">
+                    <h2>Sunday</h2>
+                    <p>3/31</p>
+                </section>
             </section>
             <section id="schedule">
                 <section class="premium">
-                    <h4>IOI City Mall <i>Premium</i></h4>
+                    <h2>IOI City Mall <i>Premium</i></h2>
                     <table class="movie-times">
                         <tr>
+                            <td>10:00</td>
+                            <td>12:00</td>
+                            <td>14:00</td>
+                            <td>16:00</td>
                             <td>10:00</td>
                             <td>12:00</td>
                             <td>14:00</td>
@@ -94,29 +284,35 @@
                     </table>
                 </section>
                 <section class="standard">
-                    <h4>IOI City Mall</h4>
+                    <h2>IOI City Mall</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
                             <td>12:00</td>
                             <td>14:00</td>
                             <td>16:00</td>
+                            <td>10:00</td>
+                            <td>16:00</td>
                         </tr>
                     </table>
                 </section>
                 <section class="standard">
-                    <h4>KUALALUMPUR Mall</h4>
+                    <h2>KUALALUMPUR Mall</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
                             <td>12:00</td>
                             <td>14:00</td>
                             <td>16:00</td>
+                            <td>12:00</td>
+                            <td>14:00</td>
+                            <td>16:00</td>
+                            <td>10:00</td>
                         </tr>
                     </table>
                 </section>
                 <section class="standard">
-                    <h4>Khartoum Mall</h4>
+                    <h2>Khartoum Mall</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
@@ -130,18 +326,49 @@
         </section>
     </main>
     <footer>
-        <section id="logo">
-
-        </section>
-        <section id="privacy-policy">
-
-        </section>
-        <section id="about-us">
-
-        </section>
-        <section id="help-center">
-
-        </section>
-    </footer>
+        <div id="footer">
+        
+            <div id="footer-top">
+                <div id="connect">
+                    <h6><b>Connect with us</b></h6>
+                    <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact-us.html">online contact form</a>.</p>
+                    &nbsp;
+                    <a href="youtube.com"><img src="images/youtube.jpg" width="40" alt="Youtube" /></a>&nbsp;&nbsp;
+                    <a href="instagram.com"><img src="images/instagram.jpg" width="40" alt="Instagram" /></a>&nbsp;&nbsp;
+                    <a href="facebook.com"><img src="images/facebook.jpg" width="40" alt="Facebook" /></a>&nbsp;&nbsp;
+                    <a href="linkedin.com"><img src="images/linkedin.jpg" width="40" alt="Linkedin" /></a>&nbsp;&nbsp;
+                    <a href="x.com"><img src="images/twitter.jpg" width="40" alt="X" /></a>
+                    
+                    <p>Have questions, check our <a href="Frequent_questions.html">frequently asked questions</a>!</p>
+                    &nbsp;
+                </div>
+                <hr/>
+                <div id="member">
+                <h6><b>Become a member!</b></h6>
+                <p>Join our 500,000 community members and get a decent discount on your weekend's movie nights!</p>
+                <div class="form-box">
+                    <form>
+                        <label for="email">Email:</label>
+                        <input type="email" id='email' name='email' placeholder='Enter your email address...' required>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr style="width:100%;margin:0;">
+        <div id="footer-bottom">
+            <div>
+                <figure>
+                <img alt="logo" title="MOViE LAND" width="200" src="images/logo.jpg" />
+                </figure>
+            </div>
+            <div id="extras">
+                <p><a href="About-us.html">About us</a></p>
+                <p><a href="Privacy_policy.html">Terms of use and privacy policy</a></p>
+                <p><u>Copyright &copy; 2024 MOViE LAND</u></p>
+            </div>
+        </div>
+    </div>
+</footer>        
 </body>
 </html>
