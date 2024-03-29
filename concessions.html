@@ -1,3 +1,13 @@
+
+
+<!--
+    This HTML file represents a concessions page for a movie theater website.
+    It contains various sections such as combo deals, food items, and a cart for adding items.
+    Users can add items to the cart, increase or decrease the quantity, and proceed to checkout.
+    The page also includes a header, footer, and social media links.
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +16,27 @@
     <title>Concessions</title>
     <link rel="stylesheet" href="style.css">
     <style>
+/* Media query for phone screens */
+@media only screen and (max-width: 600px) {
+            main {
+                padding: 20px 20px;
+            }
+            .movielist img {
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            .search-container {
+                width: 100%;
+            }
+            .nav-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .login-box {
+                display: none;
+            }
+        }        
 
 #cart table th, #cart table td {
     border: 1px solid #000; /* Black border */
@@ -43,7 +74,31 @@
 </head>
 <body>
     <header>
-        <h1>Concessions</h1>
+        <header>
+            <div style="flex-grow: 1">
+                <figure>
+                <img alt="logo" title="MOViE LAND" width="300" src="images/logo.png" />
+                </figure>
+            </div>
+                
+            <div style="flex-grow: 9">
+                <div class="search-container">
+                    <img src="images/search.jpg" width="15" alt="Search" />&nbsp;<input type="text" id="search-bar" placeholder="Type here to search..." style="width:60%;">
+                </div>
+                &nbsp;
+                <div class="nav-bar">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                    <a href="#" class="nav-link">About us</a>
+                </div>
+            </div>
+            <div class="login-box">
+                <a href="login2.html" class="login-link"><img src="images/profile.jpg" width="20" alt="login_profile" /></a>
+            </div>
+            <div class="login-box">
+                <a href="login.html" class="login-link"><img src="images/signup.jpg" width="20" alt="settings" /></a>
+            </div>
+        </header>
     </header>
 
     <main>
@@ -51,14 +106,14 @@
             <h2>Combo Deals</h2>
             <div class="carousel">
                 <div class="carousel-item">
-                    <img src="images/soda.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <img src="images/deal1.png" alt="Food item" style="width: 80px; height: 100px;">
                     <p class="price">$3.99</p>
                     <div class="quantity">
                         <button class="decrease">-</button>
                         <input type="number" value="1" min="1">
                         <button class="increase">+</button>
                     </div>
-                    <button class="add-to-cart" data-price="3.99">Add to Cart</button>
+                    <button class="add-to-cart" data-id="combo1" data-price="3.99">Add to Cart</button>
                 </div>
                 <!-- Add more items as needed -->
             </div>
@@ -66,54 +121,68 @@
 
         <section>
             <h2>Food</h2>
-            <div class="carousel">
+            <div class="carousel" style="display: flex; justify-content: left;">
                 <div class="carousel-item">
-                    <img src="images/popcorn.1png.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <img src="images/popcorn.1png.png" alt="Popcorn" style="width: 80px; height: 100px;">
                     <p class="price">$5.99</p>
                     <div class="quantity">
                         <button class="decrease">-</button>
                         <input type="number" value="1" min="1">
                         <button class="increase">+</button>
                     </div>
-                    <button class="add-to-cart" data-price="5.99">Add to Cart</button>
+                    <button class="add-to-cart" data-id="popcorn" data-price="5.99">Add to Cart</button>
                 </div>
-                <!-- Add more items as needed -->
+                <div class="carousel-item">
+                    <img src="images/soda.png" alt="Soda" style="width: 80px; height: 100px;">
+                    <p class="price">$0.99</p>
+                    <div class="quantity">
+                        <button class="decrease">-</button>
+                        <input type="number" value="1" min="1">
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart" data-id="soda" data-price="0.99">Add to Cart</button>
+                </div>
             </div>
         </section>
         <!-- Add this to your HTML where the cart is displayed -->
-<div id="cart">
-    <!-- Cart items will be added here -->
-    
-</div>
+        <div id="cart">
+            <!-- Cart items will be added here -->
+
+        </div>
+        <div id="checkout">
+            <h2>Checkout</h2>
+            <div id="total"></div>
+            <button id="checkout-button">Proceed to Checkout</button>
+        </div>
     </main>
     <script>// script.js
-    
+
         let cart = {};
-        
+
         document.querySelectorAll('.add-to-cart').forEach(button => {
-  button.addEventListener('click', event => {
-    const price = parseFloat(event.target.dataset.price);
-    const quantityInput = event.target.previousElementSibling.querySelector('input');
-    const quantity = parseInt(quantityInput.value);
-    const total = price * quantity;
+            button.addEventListener('click', event => {
+                const price = parseFloat(event.target.dataset.price);
+                const quantityInput = event.target.previousElementSibling.querySelector('input');
+                const quantity = parseInt(quantityInput.value);
+                const total = price * quantity;
 
-    const itemId = event.target.dataset.id;
-    if (cart[itemId]) {
-      cart[itemId].quantity += quantity;
-      cart[itemId].total += total;
-    } else {
-      cart[itemId] = {
-        price,
-        quantity,
-        total
-      };
-    }
+                const itemId = event.target.dataset.id;
+                if (cart[itemId]) {
+                    cart[itemId].quantity += quantity;
+                    cart[itemId].total += total;
+                } else {
+                    cart[itemId] = {
+                        price,
+                        quantity,
+                        total
+                    };
+                }
 
-    updateCart();
-    announce(`Added ${quantity} of Item ${itemId} to the cart. Total bill is now $${total.toFixed(2)}`); // Announce changes for screen readers
-  });
-});
-        
+                updateCart();
+                announce(`Added ${quantity} of Item ${itemId} to the cart. Total bill is now $${total.toFixed(2)}`); // Announce changes for screen readers
+            });
+        });
+
         document.querySelectorAll('.decrease').forEach(button => {
             button.addEventListener('click', event => {
                 const input = event.target.nextElementSibling;
@@ -122,44 +191,45 @@
                 }
             });
         });
-        
+
         document.querySelectorAll('.increase').forEach(button => {
             button.addEventListener('click', event => {
                 const input = event.target.previousElementSibling;
                 input.value = parseInt(input.value) + 1;
             });
         });
-        
+
         function updateCart() {
-    const cartElement = document.getElementById('cart');
-    cartElement.innerHTML = '';
+            const cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
 
-    let total = 0;
-    let table = document.createElement('table');
+            let total = 0;
+            let table = document.createElement('table');
 
-    // Add table header
-    let header = table.insertRow();
-    header.insertCell().textContent = 'Item Name';
-    header.insertCell().textContent = 'Price';
-    header.insertCell().textContent = 'Quantity';
-    header.insertCell().textContent = 'Total';
+            // Add table header
+            let header = table.insertRow();
+            header.insertCell().textContent = 'Item Name';
+            header.insertCell().textContent = 'Price';
+            header.insertCell().textContent = 'Quantity';
+            header.insertCell().textContent = 'Total';
 
-    for (const itemId in cart) {
-        const item = cart[itemId];
+            for (const itemId in cart) {
+                const item = cart[itemId];
 
-        let row = table.insertRow();
-        row.insertCell().textContent = `Item ${itemId}`;
-        row.insertCell().textContent = `$${item.price.toFixed(2)}`;
-        row.insertCell().textContent = item.quantity;
-        row.insertCell().textContent = `$${item.total.toFixed(2)}`;
+                let row = table.insertRow();
+                row.insertCell().textContent = `${itemId}`;
+                row.insertCell().textContent = `$${item.price.toFixed(2)}`;
+                row.insertCell().textContent = item.quantity;
+                row.insertCell().textContent = `$${item.total.toFixed(2)}`;
 
-        total += item.total;
-    }
+                total += item.total;
+            }
 
-    cartElement.appendChild(table);
-    document.getElementById('total').textContent = `Total Bill: $${total.toFixed(2)}`;
-    announce(`Total bill is now $${total.toFixed(2)}`); // Announce updated total bill
-}
+            cartElement.appendChild(table);
+            document.getElementById('total').textContent = `Total Bill: $${total.toFixed(2)}`;
+            announce(`Total bill is now $${total.toFixed(2)}`); // Announce updated total bill
+        }
+    </script>
 </script>
     <footer>
         <div id="footer-top">
