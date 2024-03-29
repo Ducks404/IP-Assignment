@@ -78,9 +78,6 @@ header{
     border-bottom: 1px solid rgb(100,100,100);
     color:lightgray;
 }
-a:link{
-    color:red;
-}
 footer > hr{
     background-color: gray;
 }

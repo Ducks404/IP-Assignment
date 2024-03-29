@@ -95,6 +95,14 @@
         .movie-times td:hover{
             background-color: rgb(70, 72, 72);
         }
+        button{
+            width: 7vw;
+            height: 5vh;
+            background-color: gray;
+        }
+        button:hover{
+            background-color: lightgray;
+        }
 
         /* To move sections */
         .hidden {
@@ -115,7 +123,6 @@
 
                 for (const time of times) {
                     time.addEventListener("click", e => {
-                    console.log("element was clicked", e.target.id, e.target.innerHTML);
 
                     document.getElementById("seat-section").className = "";
                     document.getElementById("movie-timetable").className = "hidden";
@@ -126,10 +133,14 @@
         function becomeSelected(day){
             document.getElementById('selected').id = '';
             day.id = 'selected';
-            data[date] = dat.lastElementChild.innerHTML;
+            data[date] = day.lastElementChild.innerHTML;
         }
         function selectedTime(time){
             data[time] = time.innerHTML
+        }
+        function goBack(section){
+            document.getElementById("movie-timetable").className = "";
+            document.getElementById("seat-section").className = "hidden";
         }
     </script>
 </head>
@@ -458,13 +469,17 @@
                     </table> 
                 </tr>
             </table>
+            <section id="buttons" style="margin-top: 10px;">
+                <button style="transform: translate(-5vw, 0%)" onClick="goBack()">Back</button>
+                <button style="transform: translate(5vw, 0%)">Next</button>
+            </section>
         </section>
     </main>
     <footer>
         <div id="footer-top">
             <div id="connect">
                 <h6><b>Connect with us</b></h6>
-                <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact-us.html">online contact form</a>.</p>
+                <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact.html">online contact form</a>.</p>
                 <div id="social-media">
                     <a href="youtube.com"><img src="images/youtube.jpg" width="40" alt="Youtube"></a>
                     <a href="instagram.com"><img src="images/instagram.jpg" width="40" alt="Instagram"></a>
