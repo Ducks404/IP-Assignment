@@ -3,6 +3,27 @@
 	<title>Contact Page</title>
     <link rel="stylesheet" href="style.css">
 	<style>
+        /* Media query for phone screens */
+        @media only screen and (max-width: 600px) {
+            main {
+                padding: 20px 20px;
+            }
+            .movielist img {
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            .search-container {
+                width: 100%;
+            }
+            .nav-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .login-box {
+                display: none;
+            }
+        }
     body {
         padding: 0;
         margin:0;
