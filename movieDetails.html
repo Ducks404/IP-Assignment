@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <title>Movie Details</title>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="seatStyles.css">
     <style type="text/css">
         body{
             margin:0;
@@ -13,21 +13,7 @@
         main {
             display:flex;
             flex-direction:column;
-            color:lightgray;
-            background: linear-gradient(
-          rgba(0, 0, 0, 0.5), 
-          rgba(0, 0, 0, 0.5)
-        ),
-            url(images/bg-image.jpg);
-            background-repeat: no-repeat;
-            background-attachment: fixed; 
-            background-size: 100% 100%;
-            padding-bottom: 50px;
         }
-        /* Temporary
-        main > *{
-            border: 1px solid;
-        } */
         #movie-info{
             display:flex;
             flex-direction: row;
@@ -51,7 +37,7 @@
         #bg-info{
             color:gray;
         }
-        #movie-timetable{
+        #movie-timetable.shown{
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -81,9 +67,15 @@
         .day > p{
             font-size:1vw;
         }
+        #selected {
+            border-color: red;
+            background: rgba(255,0,0,0.4)
+        }
         #schedule{
             width:90%;
             backdrop-filter:blur(15px);
+            padding-left: 20px;
+            padding-bottom: 20px;
         }
         #schedule > *{
             width: 100%;
@@ -99,128 +91,75 @@
         .movie-times td{
             padding: 10px;
         }
+        .movie-times td:hover{
+            background-color: rgb(70, 72, 72);
+        }
 
-
-
-        /*footer*/
-        p,
-        h6{
-            font-size:1.25vw
+        /* To move sections */
+        .hidden {
+            display: none;
         }
-        h6{
-            margin: 20px 0;
-        }
-        #footer {
-            border-top: 1px solid rgb(96, 123, 255);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 0;
-            padding: 20px;
-            padding-bottom:0;
-            font-size: 30px;
-            background: linear-gradient(
-            rgba(0, 0, 0, 0.4), 
-            rgba(0, 0, 0, 0.4)
-            ),url(images/footer-bg.png);
-            background-repeat: no-repeat;
-            background-attachment: fixed; 
-            background-size: 100% 100%;
-            color:lightgray
-            
-        }
-        a:link{
-            color:red;
-        }
-        #footer > hr{
-            background-color: gray;
-        }
-			
-			.login-box {
-				border: 2px solid black;
-				padding: 3px;
-				width: 85px;
-				height: 25px;
-				text-align: center;
-			}
-				
-			.login-link {
-				text-decoration: underline;
-				color: blue;
-				font-weight: bold;
-				font-size: 18px;
-			}
-			
-			.nav-bar {
-				background-color: white;
-				padding: 10px;
-				border-radius: 10px; 
-				width: 600px;
-				text-align: center;
-				border: 2px solid black;
-			}
-			
-			.nav-link {
-				color: black;
-				text-decoration: underline;
-				margin: 0 10px;
-				font-size: 25px;
-			}
-            #footer-top,
-            #footer-bottom {
-                display:flex;
-                flex-direction: row;
-                width: 100%;
-            }
-
-			.form-box {
-				border: 1px solid black; 
-				padding: 20px; 
-				background-color: rgb(173, 198, 230); 
-                color: black;
-				width: 350px; 
-				height: 25px;
-				border-radius: 10px; 
-				font-size: 20px;
-			}
-            #footer-bottom div figure{
-                max-width: 100%;
-                margin: 20px 0 0 0;
-            }
-            #footer-bottom div figure img{
-                max-width: 100%;
-            }
-            #extras{
-                display:flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                align-items: flex-end;
-                width:100%;
-            }
-            #extras > *{
-                padding: 0 10px;
-            }
     </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            var data = {
+                date: document.getElementById('selected').lastElementChild.innerHTML,
+                time: '',
+                nTickets: 0
+            }
+            const locations = document.getElementsByClassName('movie-times');
+    
+            for (const location of locations) {
+                const times = location.firstElementChild.children;
 
+                for (const time of times) {
+                    time.addEventListener("click", e => {
+                    console.log("element was clicked", e.target.id, e.target.innerHTML);
 
-    <header>
-        <figure id="logo">
+                    document.getElementById("seat-section").className = "";
+                    document.getElementById("movie-timetable").className = "hidden";
+                })
+                }
+            }
+        }
+        function becomeSelected(day){
+            document.getElementById('selected').id = '';
+            day.id = 'selected';
+            data[date] = dat.lastElementChild.innerHTML;
+        }
+        function selectedTime(time){
+            data[time] = time.innerHTML
+        }
+    </script>
+</head>
+<body>
 
+<header>
+    <div style="flex-grow: 1">
+        <figure>
+        <img alt="logo" title="MOViE LAND" width="300" src="images/logo.jpg" />
         </figure>
-        <section id="search-bar">
+    </div>
+        
+    <div style="flex-grow: 9">
+        <div class="search-container">
+            <img src="images/search.jpg" width="15" alt="Search" />&nbsp;<input type="text" id="search-bar" placeholder="Type here to search...">
+        </div>
+        &nbsp;
+        <div class="nav-bar">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Customer support</a>
+            <a href="#" class="nav-link">About us</a>
+        </div>
+    </div>
+    <div class="login-box">
+        <a href="#" class="login-link"><img src="images/profile.jpg" width="20" alt="login_profile" /></a>
+    </div>
+    <div class="login-box">
+        <a href="#" class="login-link"><img src="images/signup.jpg" width="20" alt="settings" /></a>
+    </div>
+</header>
 
-        </section>
-        <figure id="settings">
-
-        </figure>
-        <figure id="login">
-
-        </figure>
-        <nav>
-
-        </nav>
-    </header>
     <main>
         <section id="movie-info">
             <img id="movie-poster" src="images/kung-fu-panda-4-poster.webp" alt="Kungfu Panda 4 Movie Poster"/>
@@ -236,35 +175,37 @@
             </section>
         </section>
         <hr style="width:98%;"/>
-        <section id="movie-timetable">
+        
+        <!-- FIRST SECTION WHEN BUYING TICKET -->
+        <section id="movie-timetable" class="shown">
             <section id="days">
-                <section class="day">
+                <section class="day" id="selected" onclick="becomeSelected(this)">
                     <h2>Monday</h2>
-                    <p>3/25</p>
+                    <p>25/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Tuesday</h2>
-                    <p>3/26</p>
+                    <p>26/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Wednesday</h2>
-                    <p>3/27</p>
+                    <p>27/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Thursday</h2>
-                    <p>3/28</p>
+                    <p>28/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Friday</h2>
-                    <p>3/29</p>
+                    <p>29/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Saturday</h2>
-                    <p>3/30</p>
+                    <p>30/3</p>
                 </section>
-                <section class="day">
+                <section class="day" onclick="becomeSelected(this)">
                     <h2>Sunday</h2>
-                    <p>3/31</p>
+                    <p>31/3</p>
                 </section>
             </section>
             <section id="schedule">
@@ -324,9 +265,200 @@
                 </section>
             </section>
         </section>
+
+        <!-- THE NEXT SECTION AFTER USER SELECTS DATE -->
+        <section id="seat-section" class="hidden">
+            <table align="center" width="700px" height="280px">
+                <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th></th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th></th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                </tr>
+                <tr>
+                    <th>A</th>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                </tr>
+                <tr>
+                    <th>B</th>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                    <td class="seat seatNotAvailable"></td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <th>D</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <th>E</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <th>F</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                </tr>
+                <tr>
+                    <th>G</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <th>I</th>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatReserved"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td>&nbsp &nbsp &nbsp</td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                    <td class="seat seatAvailable"></td>
+                </tr>
+                <tr>
+                    <td colspan="15"></td>
+                    <table align="center" valign="middle">
+                        <tr>
+                            <th>Available:</th>
+                            <td><div class="displayAvailableColor"></div></td>
+                            <td>&nbsp &nbsp &nbsp &nbsp</td>
+                            <th>Reserved:</th>
+                            <td><div class="displayReservedColor"></div></td>
+                            <td>&nbsp &nbsp &nbsp &nbsp</td>
+                            <th>Not Available:</th>
+                            <td><div class="displayNotAvailableColor"></div></td>
+                            <td>&nbsp &nbsp &nbsp &nbsp</td>
+                        </tr>
+                    </table> 
+                </tr>
+            </table>
+        </section>
     </main>
     <footer>
-        <div id="footer">
         
             <div id="footer-top">
                 <div id="connect">
@@ -368,7 +500,6 @@
                 <p><u>Copyright &copy; 2024 MOViE LAND</u></p>
             </div>
         </div>
-    </div>
 </footer>        
 </body>
 </html>
