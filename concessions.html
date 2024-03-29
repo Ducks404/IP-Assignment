@@ -1,3 +1,13 @@
+
+
+<!--
+    This HTML file represents a concessions page for a movie theater website.
+    It contains various sections such as combo deals, food items, and a cart for adding items.
+    Users can add items to the cart, increase or decrease the quantity, and proceed to checkout.
+    The page also includes a header, footer, and social media links.
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +53,31 @@
 </head>
 <body>
     <header>
-        <h1>Concessions</h1>
+        <header>
+            <div style="flex-grow: 1">
+                <figure>
+                <img alt="logo" title="MOViE LAND" width="300" src="images/logo.png" />
+                </figure>
+            </div>
+                
+            <div style="flex-grow: 9">
+                <div class="search-container">
+                    <img src="images/search.jpg" width="15" alt="Search" />&nbsp;<input type="text" id="search-bar" placeholder="Type here to search..." style="width:60%;">
+                </div>
+                &nbsp;
+                <div class="nav-bar">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="contact.html" class="nav-link">Contact Us</a>
+                    <a href="#" class="nav-link">About us</a>
+                </div>
+            </div>
+            <div class="login-box">
+                <a href="login2.html" class="login-link"><img src="images/profile.jpg" width="20" alt="login_profile" /></a>
+            </div>
+            <div class="login-box">
+                <a href="login.html" class="login-link"><img src="images/signup.jpg" width="20" alt="settings" /></a>
+            </div>
+        </header>
     </header>
 
     <main>
@@ -51,7 +85,7 @@
             <h2>Combo Deals</h2>
             <div class="carousel">
                 <div class="carousel-item">
-                    <img src="food-item.png" alt="Food item" style="width: 134px; height: 180px;">
+                    <img src="images/deal1.png" alt="Food item" style="width: 80px; height: 100px;">
                     <p class="price">$3.99</p>
                     <div class="quantity">
                         <button class="decrease">-</button>
@@ -162,7 +196,7 @@
                 const item = cart[itemId];
 
                 let row = table.insertRow();
-                row.insertCell().textContent = `Item ${itemId}`;
+                row.insertCell().textContent = `${itemId}`;
                 row.insertCell().textContent = `$${item.price.toFixed(2)}`;
                 row.insertCell().textContent = item.quantity;
                 row.insertCell().textContent = `$${item.total.toFixed(2)}`;
