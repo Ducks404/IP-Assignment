@@ -1,0 +1,149 @@
+<html>
+	<head>
+	<title>Contact Page</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+    body {
+        padding: 0;
+        margin:0;
+    }
+    main {
+        background: white;
+        padding: 0;
+    }
+	 
+	.form-control {
+		width: 500;
+		height: 40;
+	}
+	
+	.flex-container {
+		display: flex;
+		align-content: space-between;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin: 25px;
+		padding: 20px;
+		font-size: 20px;
+        color: black;
+	}
+	
+	.half-screen-background {
+		background: linear-gradient(to bottom, rgba(0,0,0,0) 1%, rgba(0,0,0,1)), url("images/theater seats.webp");
+		background-repeat: no-repeat;
+		background-size:cover;
+		height: 50vh;
+	}
+	
+		
+	.text-container {
+            position: absolute;
+            color: white;
+            left: 2%;
+            top: 35%;
+            padding: 0.5rem;
+            font-size: 30px;
+        }
+	</style>
+	</head>
+	<body>
+        
+<header>
+    <div style="flex-grow: 1">
+        <figure>
+        <img alt="logo" title="MOViE LAND" width="300" src="images/logo.png" />
+        </figure>
+    </div>
+        
+    <div style="flex-grow: 9">
+        <div class="search-container">
+            <img src="images/search.jpg" width="15" alt="Search" />&nbsp;<input type="text" id="search-bar" placeholder="Type here to search..." style="width:60%;">
+        </div>
+        &nbsp;
+        <div class="nav-bar">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="contact.html" class="nav-link">Contact Us</a>
+            <a href="#" class="nav-link">About us</a>
+        </div>
+    </div>
+    <div class="login-box">
+        <a href="#" class="login-link"><img src="images/profile.jpg" width="20" alt="login_profile" /></a>
+    </div>
+    <div class="login-box">
+        <a href="#" class="login-link"><img src="images/signup.jpg" width="20" alt="settings" /></a>
+    </div>
+</header>
+        <main>
+		<div class="half-screen-background">
+			<div class="text-container">
+			<h1>We're here for you!</h1>
+			<h3>Our team is on hand to answer your enquiry.</h3>
+			</div>
+		</div>
+		<div class="flex-container">
+			<div>
+				<form action="" method="post">
+				<label for="name"><b> &nbsp; Name</b></label><br/>
+				<input type="text" class="form-control" id="name" name="user_name"><br/><br/>
+				
+				<label for="mail"><b>*Email</b></label><br/>
+				<input type="text" class="form-control" id="email" name="user_email" value=""required><br/>
+				&nbsp;
+			</div>
+			
+			<div>
+				<label for="msg"><b>*Type your message:</b></label><br/>
+				<textarea class="form-control" id="message" name="user_message" required></textarea>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" style="width: 10vw; height: 5vh; font-size: 1.5vw;background-color: gray;">Send</button>
+            </form>
+			</div>
+		
+		
+		
+		
+        </div>
+        </main>
+        <footer>
+            <div id="footer-top">
+                <div id="connect">
+                    <h6><b>Connect with us</b></h6>
+                    <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact-us.html">online contact form</a>.</p>
+                    <div id="social-media">
+                        <a href="youtube.com"><img src="images/youtube.jpg" width="40" alt="Youtube"></a>
+                        <a href="instagram.com"><img src="images/instagram.jpg" width="40" alt="Instagram"></a>
+                        <a href="facebook.com"><img src="images/facebook.jpg" width="40" alt="Facebook"></a>
+                        <a href="linkedin.com"><img src="images/linkedin.jpg" width="40" alt="Linkedin"></a>
+                        <a href="x.com"><img src="images/twitter.jpg" width="40" alt="X"></a>
+                    </div>
+                    <p>Have questions? Check our <a href="Frequent_questions.html">frequently asked questions</a>!</p>
+                </div>
+                <hr>
+                <div id="member">
+                    <h6><b>Become a member!</b></h6>
+                    <p>Join our 500,000 community members and get a decent discount on your weekend's movie nights!</p>
+                    <div class="form-box">
+                        <form>
+                            <label for="email">Email:</label>
+                            <input type="email" id='email' name='email' placeholder='Enter your email address...' required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr style="width:100%;margin:0;">
+            <div id="footer-bottom">
+                <div>
+                    <figure>
+                        <img alt="logo" title="MOViE LAND" width="200" src="images/logo.png">
+                    </figure>
+                </div>
+                <div id="extras">
+                    <p><a href="About-us.html">About us</a></p>
+                    <p><a href="Privacy_policy.html">Terms of use and privacy policy</a></p>
+                    <p>&copy; 2024 MOViE LAND</p>
+                </div>
+            </div>
+        </footer>
+	</body>
+</html

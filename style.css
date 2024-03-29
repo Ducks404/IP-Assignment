@@ -1,4 +1,6 @@
-
+body {
+    font-family: 'Helvetica','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 main{
     background: linear-gradient(
   rgba(0, 0, 0, 0.5), 
@@ -39,7 +41,7 @@ main{
     background: #555;
 }
 
-/*footer*/
+/* Header and Footer */
 p,
 h6{
     font-size:1.25vw
@@ -48,7 +50,7 @@ h6{
     margin: 20px 0;
 }
 footer {
-    border-top: 1px solid rgb(96, 123, 255);
+    border-top: 1px solid rgb(100,100,100);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -57,10 +59,7 @@ footer {
     padding: 20px;
     padding-bottom:0;
     font-size: 30px;
-    background: linear-gradient(
-    rgba(0, 0, 0, 0.4), 
-    rgba(0, 0, 0, 0.4)
-    ),url(images/footer-bg.png);
+    background: rgba(60,60,60);
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
@@ -71,14 +70,12 @@ header{
     display: flex;
     flex-direction: row;
     padding-top: 20px;
-    background: linear-gradient(
-    rgba(0, 0, 0, 0.4), 
-    rgba(0, 0, 0, 0.4)
-    ),url(images/footer-bg.png);
+    padding-right: 20px;
+    background: rgba(60,60,60);
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
-    border-bottom: 1px solid rgb(96, 123, 255);
+    border-bottom: 1px solid rgb(100,100,100);
     color:lightgray;
 }
 a:link{
@@ -109,7 +106,7 @@ footer > hr{
 }
 
 .nav-bar {
-    background-color: white;
+    background-color: gray;
     padding: 10px;
     border-radius: 10px; 
     width: 600px;
@@ -133,7 +130,7 @@ footer > hr{
 .form-box {
     border: 1px solid black; 
     padding: 20px; 
-    background-color: rgb(173, 198, 230); 
+    background-color: gray; 
     color: black;
     width: 350px; 
     height: 25px;

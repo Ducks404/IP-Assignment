@@ -1,23 +1,34 @@
 #seat-section {
-    margin-top: 80px;
-}
-.seat {
-    margin: auto;
-    border-radius: 20%;
-    padding: 12px;
-    background-color: rgb(230,230,230);
-    backdrop-filter:blur(15px);
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.seatAvailable:hover {
+.seat {
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20%;
+    padding: 12px;
+    background-color: lightgray;
+}
+
+.seat:hover {
     background-color: mediumaquamarine;
 }
 
 .seatReserved {
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20%;
+    padding: 12px;
     background-color: firebrick;
 }
 
 .seatNotAvailable {
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20%;
+    padding: 12px;
     background-color: grey;
 }
 
@@ -25,15 +36,17 @@
     width: 50%;
     height: 50%;
     margin: auto;
+    border: 2px solid black;
     border-radius: 20%;
     padding: 3px;
-    background-color: rgb(230,230,230);
+    background-color: lightgray;
 }
 
 .displayReservedColor {
     width: 50%;
     height: 50%;
     margin: auto;
+    border: 2px solid black;
     border-radius: 20%;
     padding: 3px;
     background-color: firebrick;
@@ -43,6 +56,7 @@
     width: 50%;
     height: 50%;
     margin: auto;
+    border: 2px solid black;
     border-radius: 20%;
     padding: 3px;
     background-color: grey;
