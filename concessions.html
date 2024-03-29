@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concessions</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+
+#cart table th, #cart table td {
+    border: 1px solid #000; /* Black border */
+    color: #f00; /* Black text */
+}
+
+#cart table th {
+    background-color: #000; /* Black background */
+    color: #f00; /* Red text */
+}
+
+
+#cart {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px transparent; /* transparent border */
+    background-color: transparent; /* Transparent background */ 
+    color: white; /* Black text */
+}
+
+#cart table th, #cart table td {
+    border: 1px transparent; /* Black border */
+    color: white; /* white text */
+}
+
+#cart table th {
+    background-color: transparent; 
+    color: white; /* White text */
+}
+
+#total {
+    color: white; /* White text */
+}
+    </style>
 </head>
 <body>
     <header>
@@ -16,12 +51,16 @@
             <h2>Combo Deals</h2>
             <div class="carousel">
                 <div class="carousel-item">
-                    <input type="radio" id="item-1" name="selectedItem">
-                    <label for="item-1">
-                      <img src="food-item.png" alt="Food Item">
-                    </label>
-                    <input type="hidden" id="selectedItemPrice" value="0.00">
+                    <img src="food-item.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <p class="price">$3.99</p>
+                    <div class="quantity">
+                        <button class="decrease">-</button>
+                        <input type="number" value="1" min="1">
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart" data-price="3.99">Add to Cart</button>
                 </div>
+                <!-- Add more items as needed -->
             </div>
         </section>
 
@@ -29,137 +68,99 @@
             <h2>Food</h2>
             <div class="carousel">
                 <div class="carousel-item">
-                    <input type="radio" id="item-1" name="selectedItem">
-                    <label for="item-1">
-                      <img src="food-item.png" alt="Food Item">
-                    </label>
-                    <input type="hidden" id="selectedItemPrice" value="0.00">
+                    <img src="food-item.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <p class="price">$5.99</p>
+                    <div class="quantity">
+                        <button class="decrease">-</button>
+                        <input type="number" value="1" min="1">
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart" data-price="5.99">Add to Cart</button>
                 </div>
+                <!-- Add more items as needed -->
             </div>
         </section>
-
-        <section>
-            <h2>Drinks</h2>
-            <div class="carousel">
-                <!-- Add your drinks items here -->
-                <div class="carousel-item">
-                    <input type="radio" id="item-1" name="selectedItem">
-                    <label for="item-1">
-                      <img src="food-item.png" alt="Food Item">
-                    </label>
-                    <input type="hidden" id="selectedItemPrice" value="0.00">
-                </div>
-            </div>
-        </section>
+        <!-- Add this to your HTML where the cart is displayed -->
+<div id="cart">
+    <!-- Cart items will be added here -->
+    
+</div>
     </main>
-    <script>
-        // JavaScript to track orders and total bill
-        let order = [];
-        let totalBill = 0;
-      
-        function addToOrder() {
-            const selectedItemRadio = document.querySelector('input[name="selectedItem"]:checked');
-            if (!selectedItemRadio) return; // No item selected
-      
-            const itemName = selectedItemRadio.nextElementSibling.textContent;
-            const itemPrice = parseFloat(document.getElementById('selectedItemPrice').value);
-      
-            order.push(itemName);
-            totalBill += itemPrice;
-            updateBillDisplay();
-            showModal();
-      
-            // Reset selection for next time
-            document.querySelector('input[name="selectedItem"]').checked = false;
-            document.getElementById('selectedItemPrice').value = "0.00";
-        }
-      
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        carouselItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const priceElement = item.querySelector('.price');
-                const price = parseFloat(priceElement.textContent.slice(1)); // Extract price value
-                document.getElementById('selectedItemPrice').value = price.toFixed(2);
+    <script>// script.js
+    
+        let cart = {};
+        
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', event => {
+    const price = parseFloat(event.target.dataset.price);
+    const quantityInput = event.target.previousElementSibling.querySelector('input');
+    const quantity = parseInt(quantityInput.value);
+    const total = price * quantity;
+
+    const itemId = event.target.dataset.id;
+    if (cart[itemId]) {
+      cart[itemId].quantity += quantity;
+      cart[itemId].total += total;
+    } else {
+      cart[itemId] = {
+        price,
+        quantity,
+        total
+      };
+    }
+
+    updateCart();
+    announce(`Added ${quantity} of Item ${itemId} to the cart. Total bill is now $${total.toFixed(2)}`); // Announce changes for screen readers
+  });
+});
+        
+        document.querySelectorAll('.decrease').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.nextElementSibling;
+                if (input.value > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
             });
         });
-      
-        function updateBillDisplay() {
-            document.getElementById('total-bill').textContent = `Total Bill: $${totalBill.toFixed(2)}`;
-        }
-      
-        window.onload = function() {
-            // Initialize total bill display
-            const billDisplay = document.createElement('p');
-            billDisplay.id = 'total-bill';
-            billDisplay.textContent = 'Total Bill: $0.00';
-            document.body.appendChild(billDisplay);
-      
-            // Get the modal
-            var modal = document.getElementById('myModal');
-      
-            // Get the button that opens the modal
-            var btn = document.getElementById('checkout');
-      
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName('close')[0];
-      
-            // When the user clicks the button, open the modal 
-            btn.onclick = function() {
-                modal.style.display = 'block';
-            }
-      
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() {
-                modal.style.display = 'none';
-            }
-      
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            };
-      
-            function nextSlide() {
-                const carousel = document.querySelector('.carousel');
-                const items = document.querySelectorAll('.carousel-item');
-                const currentItem = carousel.scrollLeft / items[0].clientWidth;
-                const nextItem = (currentItem + 1) % items.length;
-                carousel.scrollTo({
-                    left: items[nextItem].offsetLeft,
-                    behavior: 'smooth'
-                });
-            }
-      
-            // Set the interval for the carousel to automatically slide
-            setInterval(nextSlide, 3000); // Slides every 3 seconds
-      
-            // Function to add item to order with accessibility in mind
-            function addToOrder(itemName, price) {
-                // Update order array and total bill
-                order.push({ itemName, price });
-                totalBill += price;
-                updateBillDisplay();
-                // Announce the addition for screen readers
-                announce(`Added ${itemName} to the order. Total bill is now $${totalBill.toFixed(2)}`);
-            }
-      
-            // Function to announce changes for screen readers
-            function announce(message) {
-                const liveRegion = document.querySelector('.live-region');
-                if (!liveRegion) {
-                    const region = document.createElement('div');
-                    region.setAttribute('aria-live', 'polite');
-                    region.setAttribute('aria-atomic', 'true');
-                    region.classList.add('live-region');
-                    region.style.position = 'absolute';
-                    region.style.left = '-9999px';
-                    document.body.appendChild(region);
-                }
-                liveRegion.textContent = message;
-            }
-        }
-    </script>
+        
+        document.querySelectorAll('.increase').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.previousElementSibling;
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+        
+        function updateCart() {
+    const cartElement = document.getElementById('cart');
+    cartElement.innerHTML = '';
+
+    let total = 0;
+    let table = document.createElement('table');
+
+    // Add table header
+    let header = table.insertRow();
+    header.insertCell().textContent = 'Item Name';
+    header.insertCell().textContent = 'Price';
+    header.insertCell().textContent = 'Quantity';
+    header.insertCell().textContent = 'Total';
+
+    for (const itemId in cart) {
+        const item = cart[itemId];
+
+        let row = table.insertRow();
+        row.insertCell().textContent = `Item ${itemId}`;
+        row.insertCell().textContent = `$${item.price.toFixed(2)}`;
+        row.insertCell().textContent = item.quantity;
+        row.insertCell().textContent = `$${item.total.toFixed(2)}`;
+
+        total += item.total;
+    }
+
+    cartElement.appendChild(table);
+    document.getElementById('total').textContent = `Total Bill: $${total.toFixed(2)}`;
+    announce(`Total bill is now $${total.toFixed(2)}`); // Announce updated total bill
+}
+</script>
     <footer>
         <div id="footer-top">
             <div id="connect">
