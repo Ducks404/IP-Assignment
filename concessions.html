@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concessions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+#cart table th, #cart table td {
+    border: 1px solid #000; /* Black border */
+    color: #f00; /* Black text */
+}
+
+#cart table th {
+    background-color: #000; /* Black background */
+    color: #f00; /* Red text */
+}
+
+
+#cart {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px transparent; /* transparent border */
+    background-color: transparent; /* Transparent background */ 
+    color: white; /* Black text */
+}
+
+#cart table th, #cart table td {
+    border: 1px transparent; /* Black border */
+    color: white; /* white text */
+}
+
+#cart table th {
+    background-color: transparent; 
+    color: white; /* White text */
+}
+
+#total {
+    color: white; /* White text */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Concessions</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Combo Deals</h2>
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="food-item.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <p class="price">$3.99</p>
+                    <div class="quantity">
+                        <button class="decrease">-</button>
+                        <input type="number" value="1" min="1">
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart" data-price="3.99">Add to Cart</button>
+                </div>
+                <!-- Add more items as needed -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Food</h2>
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="food-item.png" alt="Food Item" style="width: 134px; height: 180px;">
+                    <p class="price">$5.99</p>
+                    <div class="quantity">
+                        <button class="decrease">-</button>
+                        <input type="number" value="1" min="1">
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="add-to-cart" data-price="5.99">Add to Cart</button>
+                </div>
+                <!-- Add more items as needed -->
+            </div>
+        </section>
+        <!-- Add this to your HTML where the cart is displayed -->
+<div id="cart">
+    <!-- Cart items will be added here -->
+    
+</div>
+    </main>
+    <script>// script.js
+    
+        let cart = {};
+        
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+  button.addEventListener('click', event => {
+    const price = parseFloat(event.target.dataset.price);
+    const quantityInput = event.target.previousElementSibling.querySelector('input');
+    const quantity = parseInt(quantityInput.value);
+    const total = price * quantity;
+
+    const itemId = event.target.dataset.id;
+    if (cart[itemId]) {
+      cart[itemId].quantity += quantity;
+      cart[itemId].total += total;
+    } else {
+      cart[itemId] = {
+        price,
+        quantity,
+        total
+      };
+    }
+
+    updateCart();
+    announce(`Added ${quantity} of Item ${itemId} to the cart. Total bill is now $${total.toFixed(2)}`); // Announce changes for screen readers
+  });
+});
+        
+        document.querySelectorAll('.decrease').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.nextElementSibling;
+                if (input.value > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
+            });
+        });
+        
+        document.querySelectorAll('.increase').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.previousElementSibling;
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+        
+        function updateCart() {
+    const cartElement = document.getElementById('cart');
+    cartElement.innerHTML = '';
+
+    let total = 0;
+    let table = document.createElement('table');
+
+    // Add table header
+    let header = table.insertRow();
+    header.insertCell().textContent = 'Item Name';
+    header.insertCell().textContent = 'Price';
+    header.insertCell().textContent = 'Quantity';
+    header.insertCell().textContent = 'Total';
+
+    for (const itemId in cart) {
+        const item = cart[itemId];
+
+        let row = table.insertRow();
+        row.insertCell().textContent = `Item ${itemId}`;
+        row.insertCell().textContent = `$${item.price.toFixed(2)}`;
+        row.insertCell().textContent = item.quantity;
+        row.insertCell().textContent = `$${item.total.toFixed(2)}`;
+
+        total += item.total;
+    }
+
+    cartElement.appendChild(table);
+    document.getElementById('total').textContent = `Total Bill: $${total.toFixed(2)}`;
+    announce(`Total bill is now $${total.toFixed(2)}`); // Announce updated total bill
+}
+</script>
+    <footer>
+        <div id="footer-top">
+            <div id="connect">
+                <h6><b>Connect with us</b></h6>
+                <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact-us.html">online contact form</a>.</p>
+                <div id="social-media">
+                    <a href="youtube.com"><img src="images/youtube.jpg" width="40" alt="Youtube"></a>
+                    <a href="instagram.com"><img src="images/instagram.jpg" width="40" alt="Instagram"></a>
+                    <a href="facebook.com"><img src="images/facebook.jpg" width="40" alt="Facebook"></a>
+                    <a href="linkedin.com"><img src="images/linkedin.jpg" width="40" alt="Linkedin"></a>
+                    <a href="x.com"><img src="images/twitter.jpg" width="40" alt="X"></a>
+                </div>
+                <p>Have questions? Check our <a href="Frequent_questions.html">frequently asked questions</a>!</p>
+            </div>
+            <hr>
+            <div id="member">
+                <h6><b>Become a member!</b></h6>
+                <p>Join our 500,000 community members and get a decent discount on your weekend's movie nights!</p>
+                <div class="form-box">
+                    <form>
+                        <label for="email">Email:</label>
+                        <input type="email" id='email' name='email' placeholder='Enter your email address...' required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr style="width:100%;margin:0;">
+        <div id="footer-bottom">
+            <div>
+                <figure>
+                    <img alt="logo" title="MOViE LAND" width="200" src="images/logo.jpg">
+                </figure>
+            </div>
+            <div id="extras">
+                <p><a href="About-us.html">About us</a></p>
+                <p><a href="Privacy_policy.html">Terms of use and privacy policy</a></p>
+                <p><u>&copy; 2024 MOViE LAND</u></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
