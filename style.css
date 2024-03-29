@@ -1,5 +1,7 @@
 body {
     font-family: 'Helvetica','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin:0;
+    padding: 0;
 }
 main{
     background: linear-gradient(
@@ -12,6 +14,9 @@ main{
     background-size:100% 100%;
     padding: 50px 0px;
     color:lightgray;
+}
+a {
+    color:rgb(0, 98, 255);
 }
 
 
@@ -59,10 +64,10 @@ footer {
     padding: 20px;
     padding-bottom:0;
     font-size: 30px;
-    background: rgba(60,60,60);
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-size: 100% 100%;
+    background: linear-gradient(
+        rgb(60, 60, 60), 
+        rgb(20, 20, 20)
+      );
     color:lightgray;
     
 }
@@ -71,10 +76,10 @@ header{
     flex-direction: row;
     padding-top: 20px;
     padding-right: 20px;
-    background: rgba(60,60,60);
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-size: 100% 100%;
+    background: linear-gradient(
+        rgb(40, 40, 40), 
+        rgb(60, 60, 60)
+      );
     border-bottom: 1px solid rgb(100,100,100);
     color:lightgray;
 }
@@ -150,133 +155,4 @@ footer > hr{
 }
 #extras > *{
     padding: 0 10px;
-}
-@media (max-width: 768px) {
-    .carousel-item {
-      width: 80%;
-    }
-    .modal-content {
-      width: 95%;
-    }
-    /* Accessibility improvements */
-  .carousel-item:focus-within {
-    outline: 3px solid yellow;
-  }
-  .carousel-item img {
-    max-width: 100%;
-    height: auto;
-  }
-  /* Enhance user interaction */
-  .button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .button-primary {
-    background-color: red;
-    color: white;
-  }
-  .button-primary:hover {
-    background-color: darkred;
-  }
-  .button-secondary {
-    background-color: black;
-    color: white;
-  }
-  .button-secondary:hover {
-    background-color: #333;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 20px 0;
-  }
-  .carousel-item {
-    scroll-snap-align: start;
-    flex: none;
-    width: 300px;
-    margin-right: 20px;
-    position: relative;
-    transition: transform 0.5s ease;
-  }
-  .carousel-item:last-child {
-    margin-right: 0;
-  }
-  .carousel-item:hover {
-    transform: scale(1.05);
-  }
-  .combo {
-    border: 2px solid red;
-    padding: 10px;
-    background-color: #444; /* Darker background for combos */
-  }
-  .combo:hover {
-    background-color: #555; /* Lighten on hover */
-  }
-  .price {
-    font-weight: 700;
-  }
-checkout-button {
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
-  }
-  .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  /* Carousel animations */
-@keyframes slide-in {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-.carousel-item {
-    animation: slide-in 1s forwards;
-}
 }

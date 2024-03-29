@@ -5,6 +5,7 @@
     <title>Movie Details</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="seatStyles.css">
+    <link rel="stylesheet" href="foodAndPaymentStyles.css">
     <style type="text/css">
         body{
             margin:0;
@@ -116,12 +117,12 @@
         .movie-times td:hover{
             background-color: rgb(70, 72, 72);
         }
-        button{
+        .seatButtons{
             width: 7vw;
             height: 5vh;
             background-color: gray;
         }
-        button:hover{
+        .seatButtons:hover{
             background-color: lightgray;
         }
 
@@ -137,6 +138,7 @@
                 time: '',
                 nTickets: 0
             }
+
             const locations = document.getElementsByClassName('movie-times');
     
             for (const location of locations) {
@@ -150,6 +152,14 @@
                 })
                 }
             }
+
+            const availableSeats = document.getElementsByClassName('seat');
+    
+            for (const seat of availableSeats) {
+                seat.addEventListener("click", e => {
+                    seat.classList.toggle("seatSelected");
+                })
+            }
         }
         function becomeSelected(day){
             document.getElementById('selected').id = '';
@@ -159,38 +169,47 @@
         function selectedTime(time){
             data[time] = time.innerHTML
         }
-        function goBack(section){
+        function goBack(){
+            const selectedSeats = document.getElementsByClassName('seatSelected');
+    
+            for (const seat of selectedSeats) {
+                seat.classList.toggle("seatSelected");
+            }
             document.getElementById("movie-timetable").className = "";
             document.getElementById("seat-section").className = "hidden";
+        }
+        function goNext(){
+            document.getElementById("seat-section").className = "hidden";
+            document.getElementById("F&P").className = "";
         }
     </script>
 </head>
 <body>
 
 <header>
-    <div style="flex-grow: 1">
+    <section style="flex-grow: 1">
         <figure>
         <img alt="logo" title="MOViE LAND" width="300" src="images/logo.png" />
         </figure>
-    </div>
+    </section>
         
-    <div style="flex-grow: 9">
-        <div class="search-container">
+    <section style="flex-grow: 9">
+        <section class="search-container">
             <img src="images/search.jpg" width="15" alt="Search" />&nbsp;<input type="text" id="search-bar" placeholder="Type here to search..." style="width:60%;">
-        </div>
+        </section>
         &nbsp;
-        <div class="nav-bar">
+        <section class="nav-bar">
             <a href="index.html" class="nav-link">Home</a>
             <a href="contact.html" class="nav-link">Contact Us</a>
             <a href="#" class="nav-link">About us</a>
-        </div>
-    </div>
-    <div class="login-box">
+        </section>
+    </section>
+    <section class="login-box">
         <a href="#" class="login-link"><img src="images/profile.jpg" width="20" alt="login_profile" /></a>
-    </div>
-    <div class="login-box">
+    </section>
+    <section class="login-box">
         <a href="#" class="login-link"><img src="images/signup.jpg" width="20" alt="settings" /></a>
-    </div>
+    </section>
 </header>
 
     <main>
@@ -243,7 +262,7 @@
             </section>
             <section id="schedule">
                 <section class="premium">
-                    <h2>IOI City Mall <i>Premium</i></h2>
+                    <h2>IOI City Mall <i>Premium</i> 40RM</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
@@ -258,7 +277,7 @@
                     </table>
                 </section>
                 <section class="standard">
-                    <h2>IOI City Mall</h2>
+                    <h2>IOI City Mall 25RM</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
@@ -271,7 +290,7 @@
                     </table>
                 </section>
                 <section class="standard">
-                    <h2>KUALALUMPUR Mall</h2>
+                    <h2>KUALALUMPUR Mall 25RM</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
@@ -286,7 +305,7 @@
                     </table>
                 </section>
                 <section class="standard">
-                    <h2>Khartoum Mall</h2>
+                    <h2>Khartoum Mall 25RM</h2>
                     <table class="movie-times">
                         <tr>
                             <td>10:00</td>
@@ -322,220 +341,361 @@
                 </tr>
                 <tr>
                     <th>A</th>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
                 </tr>
                 <tr>
                     <th>B</th>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
-                    <td><div class="seatNotAvailable"></div></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
+                    <td><section class="seatNotAvailable"></section></td>
                 </tr>
                 <tr>
                     <th>C</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <th>D</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <th>E</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <th>F</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
                 </tr>
                 <tr>
                     <th>G</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <th>H</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <th>I</th>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seatReserved"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seatReserved"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                     <td>&nbsp &nbsp &nbsp</td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
-                    <td><div class="seat"></div></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
+                    <td><section class="seat"></section></td>
                 </tr>
                 <tr>
                     <td colspan="15"></td>
                     <table align="center" valign="middle">
                         <tr>
                             <th>Available:</th>
-                            <td><div class="displayAvailableColor"></div></td>
+                            <td><section class="displayAvailableColor"></section></td>
                             <td>&nbsp &nbsp &nbsp &nbsp</td>
                             <th>Reserved:</th>
-                            <td><div class="displayReservedColor"></div></td>
+                            <td><section class="displayReservedColor"></section></td>
                             <td>&nbsp &nbsp &nbsp &nbsp</td>
                             <th>Not Available:</th>
-                            <td><div class="displayNotAvailableColor"></div></td>
+                            <td><section class="displayNotAvailableColor"></section></td>
                             <td>&nbsp &nbsp &nbsp &nbsp</td>
                         </tr>
                     </table> 
                 </tr>
             </table>
             <section id="buttons" style="margin-top: 10px;">
-                <button style="transform: translate(-5vw, 0%)" onClick="goBack()">Back</button>
-                <button style="transform: translate(5vw, 0%)">Next</button>
+                <button class="seatButtons" style="transform: translate(-5vw, 0%)" onClick="goBack()">Back</button>
+                <button class="seatButtons" style="transform: translate(5vw, 0%)" onClick="goNext()">Next</button>
             </section>
         </section>
+
+        <!-- NEXT SECTION FOOD AND PAYMENT -->
+        <section id="F&P" class="hidden">
+            <h1 style="text-align:center;">Buy Some Food</h1>
+            <section id="foodAndPayment-section">
+                <section id="food-section">
+                    <section id="combos">
+                        <h2>Combo Deals</h2>
+                        <section class="carousel">
+                            <section class="carousel-item">
+                                <img src="images/deal1.png" alt="Popcorn, chicken, and coca cola" style="width: 134px; height: 180px;">
+                                <p class="price">$3.99</p>
+                                <section class="quantity">
+                                    <button class="decrease">-</button>
+                                    <input type="number" value="1" min="1">
+                                    <button class="increase">+</button>
+                                </section>
+                                <button class="add-to-cart" data-id="combo1" data-price="3.99">Add to Cart</button>
+                            </section>
+                            <!-- Add more items as needed -->
+                        </section>
+                    </section>
+        
+                    <section id="food">
+                        <h2>Food</h2>
+                        <section class="carousel" style="display: flex; justify-content: left;">
+                            <section class="carousel-item">
+                                <img src="images/popcorn.1png.png" alt="Popcorn" style="width: 80px; height: 100px;">
+                                <p class="price">$5.99</p>
+                                <section class="quantity">
+                                    <button class="decrease">-</button>
+                                    <input type="number" value="1" min="1">
+                                    <button class="increase">+</button>
+                                </section>
+                                <button class="add-to-cart" data-id="popcorn" data-price="5.99">Add to Cart</button>
+                            </section>
+                            <section class="carousel-item">
+                                <img src="images/soda.png" alt="Soda" style="width: 80px; height: 100px;">
+                                <p class="price">$0.99</p>
+                                <section class="quantity">
+                                    <button class="decrease">-</button>
+                                    <input type="number" value="1" min="1">
+                                    <button class="increase">+</button>
+                                </section>
+                                <button class="add-to-cart" data-id="soda" data-price="0.99">Add to Cart</button>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+                <section id="payment">
+                    <!-- Add this to your HTML where the cart is displayed -->
+                    <section id="cart">
+                        <!-- Cart items will be added here -->
+            
+                    </section>
+                    <section id="checkout">
+                        <h2>Checkout</h2>
+                        <section id="total"></section>
+                        <a href="checkout.html"><button id="checkout-button">Proceed to Checkout</button></a>
+                    </section>
+                </section>
+            </section>
+        </section>
+        
+    <script>// script.js
+
+        let cart = {};
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', event => {
+                const price = parseFloat(event.target.dataset.price);
+                const quantityInput = event.target.previousElementSibling.querySelector('input');
+                const quantity = parseInt(quantityInput.value);
+                const total = price * quantity;
+
+                const itemId = event.target.dataset.id;
+                if (cart[itemId]) {
+                    cart[itemId].quantity += quantity;
+                    cart[itemId].total += total;
+                } else {
+                    cart[itemId] = {
+                        price,
+                        quantity,
+                        total
+                    };
+                }
+
+                updateCart();
+                announce(`Added ${quantity} of Item ${itemId} to the cart. Total bill is now $${total.toFixed(2)}`); // Announce changes for screen readers
+            });
+        });
+
+        document.querySelectorAll('.decrease').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.nextElementSibling;
+                if (input.value > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll('.increase').forEach(button => {
+            button.addEventListener('click', event => {
+                const input = event.target.previousElementSibling;
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+
+        function updateCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
+
+            let total = 0;
+            let table = document.createElement('table');
+
+            // Add table header
+            let header = table.insertRow();
+            header.insertCell().textContent = 'Item Name';
+            header.insertCell().textContent = 'Price';
+            header.insertCell().textContent = 'Quantity';
+            header.insertCell().textContent = 'Total';
+
+            for (const itemId in cart) {
+                const item = cart[itemId];
+
+                let row = table.insertRow();
+                row.insertCell().textContent = `${itemId}`;
+                row.insertCell().textContent = `$${item.price.toFixed(2)}`;
+                row.insertCell().textContent = item.quantity;
+                row.insertCell().textContent = `$${item.total.toFixed(2)}`;
+
+                total += item.total;
+            }
+
+            cartElement.appendChild(table);
+            document.getElementById('total').textContent = `Total Bill: $${total.toFixed(2)}`;
+            announce(`Total bill is now $${total.toFixed(2)}`); // Announce updated total bill
+        }
+    </script>
+
+
     </main>
     <footer>
-        <div id="footer-top">
-            <div id="connect">
+        <section id="footer-top">
+            <section id="connect">
                 <h6><b>Connect with us</b></h6>
                 <p>Reach us at <a href="mailto:some_account!!!">*@gmail.com</a> or through our <a href="contact.html">online contact form</a>.</p>
-                <div id="social-media">
+                <section id="social-media">
                     <a href="youtube.com"><img src="images/youtube.jpg" width="40" alt="Youtube"></a>
                     <a href="instagram.com"><img src="images/instagram.jpg" width="40" alt="Instagram"></a>
                     <a href="facebook.com"><img src="images/facebook.jpg" width="40" alt="Facebook"></a>
                     <a href="linkedin.com"><img src="images/linkedin.jpg" width="40" alt="Linkedin"></a>
                     <a href="x.com"><img src="images/twitter.jpg" width="40" alt="X"></a>
-                </div>
+                </section>
                 <p>Have questions? Check our <a href="Frequent_questions.html">frequently asked questions</a>!</p>
-            </div>
+            </section>
             <hr>
-            <div id="member">
+            <section id="member">
                 <h6><b>Become a member!</b></h6>
                 <p>Join our 500,000 community members and get a decent discount on your weekend's movie nights!</p>
-                <div class="form-box">
+                <section class="form-box">
                     <form>
                         <label for="email">Email:</label>
                         <input type="email" id='email' name='email' placeholder='Enter your email address...' required>
                         <button type="submit">Subscribe</button>
                     </form>
-                </div>
-            </div>
-        </div>
+                </section>
+            </section>
+        </section>
         <hr style="width:100%;margin:0;">
-        <div id="footer-bottom">
-            <div>
+        <section id="footer-bottom">
+            <section>
                 <figure>
                     <img alt="logo" title="MOViE LAND" width="200" src="images/logo.png">
                 </figure>
-            </div>
-            <div id="extras">
+            </section>
+            <section id="extras">
                 <p><a href="About-us.html">About us</a></p>
                 <p><a href="Privacy_policy.html">Terms of use and privacy policy</a></p>
                 <p>&copy; 2024 MOViE LAND</p>
-            </div>
-        </div>
+            </section>
+        </section>
     </footer>
 </body>
 </html>

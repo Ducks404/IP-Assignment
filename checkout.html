@@ -1,0 +1,75 @@
+<html>
+	<head>
+	<title>Contact Page</title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+        /* Media query for phone screens */
+        @media only screen and (max-width: 600px) {
+            main {
+                padding: 20px 20px;
+            }
+            .movielist img {
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            .search-container {
+                width: 100%;
+            }
+            .nav-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .login-box {
+                display: none;
+            }
+        }
+	 
+    body {
+        background: linear-gradient(
+    rgba(0, 0, 0, 0.5), 
+    rgba(0, 0, 0, 0.5)
+    ),
+        url(images/bg-image.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size:100% 100%;
+        padding: 50px 0px;
+        color:lightgray;
+    }
+    main {
+        background: auto;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+	.form-control {
+		width: 500;
+		height: 40;
+    }
+
+	</style>
+    <script type="text/javascript">
+        function goHome(){
+            alert("Thank you for purchasing through our website!");
+            window.location = "index.html";
+        }
+    </script>
+	</head>
+	<body>
+        
+        <main>
+            <form>
+				<label for="name"><b>Name</b></label><br/>
+				<input type="text" class="form-control" id="name" name="user_name"><br/><br/>
+				
+                <label for="paymentDetails"><b>Payment Details</b></label><br/>
+				<input type="text" class="form-control" id="paymentDetails" name="user_paymentdetails" value="" required><br/>
+				&nbsp;
+				<button type="submit" style="width: 10vw; height: 5vh; font-size: 1.5vw;background-color: gray;" onClick="goHome()">Send</button>
+            </form>
+        </main>
+	</body>
+</html
