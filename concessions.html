@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food and Drinks</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    background-image: url('background.png');
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #333; /* Fallback for when the image is not available */
+  }
+  @media (max-width: 768px) {
+    .carousel-item {
+      width: 80%;
+    }
+    .modal-content {
+      width: 95%;
+    }
+    /* Accessibility improvements */
+  .carousel-item:focus-within {
+    outline: 3px solid yellow;
+  }
+  .carousel-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Enhance user interaction */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .button-primary {
+    background-color: red;
+    color: white;
+  }
+  .button-primary:hover {
+    background-color: darkred;
+  }
+  .button-secondary {
+    background-color: black;
+    color: white;
+  }
+  .button-secondary:hover {
+    background-color: #333;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 20px 0;
+  }
+  .carousel-item {
+    scroll-snap-align: start;
+    flex: none;
+    width: 300px;
+    margin-right: 20px;
+    position: relative;
+    transition: transform 0.5s ease;
+  }
+  .carousel-item:last-child {
+    margin-right: 0;
+  }
+  .carousel-item:hover {
+    transform: scale(1.05);
+  }
+  .combo {
+    border: 2px solid red;
+    padding: 10px;
+    background-color: #444; /* Darker background for combos */
+  }
+  .combo:hover {
+    background-color: #555; /* Lighten on hover */
+  }
+  .price {
+    font-weight: 700;
+  }
+checkout-button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* Carousel animations */
+<style>
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+.carousel-item {
+    animation: slide-in 1s forwards;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="carousel">
+        <!-- Repeat this block for each item -->
+        <div class="carousel-item">
+            <input type="radio" id="item-1" name="selectedItem">
+            <label for="item-1">
+                <img src="food-item.png" alt="Food Item">
+                <p>Food Item Name</p>
+                <p class="price">$3.99</p>
+            </label>
+            <input type="hidden" id="selectedItemPrice" value="0.00">
+        </div>
+
+        <!-- Combo deals highlighted -->
+        <div class="carousel-item combo">
+            <img src="combo-item.png" alt="Combo Item">
+            <p>Combo Item Name</p>
+            <p class="price">$9.99</p>
+        </div>
+        <button class="checkout-button" id="checkout">Checkout</button>
+        <button class="button button-primary">Add Popcorn to Order</button>
+
+        <!-- Checkout Button -->
+        <button class="button button-secondary" id="checkout">Checkout</button>
+
+        <!-- Modal for Checkout Confirmation -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Your order has been confirmed!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to track orders and total bill
+        let order = [];
+        let totalBill = 0;
+
+        function addToOrder() {
+            const selectedItemRadio = document.querySelector('input[name="selectedItem"]:checked');
+            if (!selectedItemRadio) return; // No item selected
+
+            const itemName = selectedItemRadio.nextElementSibling.textContent;
+            const itemPrice = parseFloat(document.getElementById('selectedItemPrice').value);
+
+            order.push(itemName);
+            totalBill += itemPrice;
+            updateBillDisplay();
+            showModal();
+
+            // Reset selection for next time
+            document.querySelector('input[name="selectedItem"]').checked = false;
+            document.getElementById('selectedItemPrice').value = "0.00";
+        }
+
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        carouselItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const priceElement = item.querySelector('.price');
+                const price = parseFloat(priceElement.textContent.slice(1)); // Extract price value
+                document.getElementById('selectedItemPrice').value = price.toFixed(2);
+            });
+        });
+
+        function updateBillDisplay() {
+            document.getElementById('total-bill').textContent = `Total Bill: $${totalBill.toFixed(2)}`;
+        }
+
+        window.onload = function() {
+            // Initialize total bill display
+            const billDisplay = document.createElement('p');
+            billDisplay.id = 'total-bill';
+            billDisplay.textContent = 'Total Bill: $0.00';
+            document.body.appendChild(billDisplay);
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            // Get the button that opens the modal
+            var btn = document.getElementById('checkout');
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName('close')[0];
+
+            // When the user clicks the button, open the modal 
+            btn.onclick = function() {
+                modal.style.display = 'block';
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+
+        function nextSlide() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const currentItem = carousel.scrollLeft / items[0].clientWidth;
+            const nextItem = (currentItem + 1) % items.length;
+            carousel.scrollTo({
+                left: items[nextItem].offsetLeft,
+                behavior: 'smooth'
+            });
+        }
+
+        // Set the interval for the carousel to automatically slide
+        setInterval(nextSlide, 3000); // Slides every 3 seconds
+
+        // Function to add item to order with accessibility in mind
+        function addToOrder(itemName, price) {
+            // Update order array and total bill
+            order.push({ itemName, price });
+            totalBill += price;
+            updateBillDisplay();
+            // Announce the addition for screen readers
+            announce(`Added ${itemName} to the order. Total bill is now $${totalBill.toFixed(2)}`);
+        }
+
+        // Function to announce changes for screen readers
+        function announce(message) {
+            const liveRegion = document.querySelector('.live-region');
+            if (!liveRegion) {
+                const region = document.createElement('div');
+                region.setAttribute('aria-live', 'polite');
+                region.setAttribute('aria-atomic', 'true');
+                region.classList.add('live-region');
+                region.style.position = 'absolute';
+                region.style.left = '-9999px';
+                document.body.appendChild(region);
+            }
+            liveRegion.textContent = message;
+        }
+    </script>
+
+</body>
+</html>
